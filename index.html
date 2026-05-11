@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Hassaan | Web Developer & Software Designer</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;800&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="tailwind.generated.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased selection:bg-accent-500 selection:text-white relative">
+
+    <div id="preloader">
+        <div class="loader-text text-gradient">Muhammad Hassaan</div>
+        <div class="loader-bar-container"><div class="loader-bar" id="loader-bar"></div></div>
+    </div>
+
+    <canvas id="three-canvas"></canvas>
+    <div class="noise-overlay"></div>
+    <div class="bg-blob bg-accent-600 w-[500px] h-[500px] top-[-10%] left-[-10%] animate-blob" style="-webkit-mask-image: radial-gradient(ellipse at 30% 40%, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 55%, transparent 75%); mask-image: radial-gradient(ellipse at 30% 40%, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 55%, transparent 75%);"></div>
+    <div class="bg-blob bg-accent-400 w-[600px] h-[600px] bottom-[-20%] right-[-10%] animate-blob" style="animation-direction: alternate-reverse; animation-duration: 15s; -webkit-mask-image: radial-gradient(ellipse at 70% 60%, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 55%, transparent 75%); mask-image: radial-gradient(ellipse at 70% 60%, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 55%, transparent 75%);"></div>
+
+    <nav class="fixed w-full z-40 top-0 transition-all duration-300" id="navbar">
+        <div class="mx-auto max-w-7xl mt-6 rounded-2xl px-8 py-4 flex justify-between items-center w-[90%] border border-white/5 bg-dark/40 backdrop-blur-xl shadow-lg">
+            <div class="nav-logo-wrap">
+
+            <!-- Escaped placeholder — shown when robot is roaming -->
+            <div class="nav-logo-escaped" id="nav-logo-escaped" aria-hidden="true">
+                <div class="escaped-cage">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Broken cage bars -->
+                        <rect x="8" y="10" width="32" height="28" rx="4" fill="none" stroke="rgba(0,242,254,0.3)" stroke-width="1.5" stroke-dasharray="3 2"/>
+                        <!-- Bars -->
+                        <line x1="16" y1="10" x2="16" y2="38" stroke="rgba(0,242,254,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="24" y1="10" x2="24" y2="38" stroke="rgba(0,242,254,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+                        <!-- Broken bar (right) — bent/missing -->
+                        <line x1="32" y1="10" x2="32" y2="22" stroke="rgba(255,80,80,0.7)" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="32" y1="26" x2="36" y2="38" stroke="rgba(255,80,80,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2 2"/>
+                        <!-- Door open -->
+                        <path d="M8 24 Q4 24 4 20 L4 14 Q4 10 8 10" stroke="rgba(0,242,254,0.5)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                        <!-- Sparks -->
+                        <circle cx="33" cy="23" r="1.5" fill="#ff5050" class="cage-spark cage-spark--1"/>
+                        <circle cx="37" cy="19" r="1"   fill="#ffaa00" class="cage-spark cage-spark--2"/>
+                        <circle cx="35" cy="27" r="1"   fill="#ff5050" class="cage-spark cage-spark--3"/>
+                        <!-- Question mark -->
+                        <text x="17" y="29" font-size="11" fill="rgba(0,242,254,0.6)" font-family="Space Grotesk,sans-serif" font-weight="700">?</text>
+                    </svg>
+                    <span class="escaped-label">Escaped!</span>
+                </div>
+            </div>
+
+            <a href="#home" class="nav-logo" aria-label="Muhammad Hassaan - Home" id="robot-logo-link">
+                <!-- Cute Animated Robot Head SVG Logo -->
+                <svg class="nav-logo__svg" width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <defs>
+                        <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+                            <stop offset="100%" stop-color="#00f2fe" stop-opacity="1"/>
+                        </radialGradient>
+                        <radialGradient id="headFill" cx="50%" cy="40%" r="60%">
+                            <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.12"/>
+                            <stop offset="100%" stop-color="#0a0c12" stop-opacity="0.05"/>
+                        </radialGradient>
+                    </defs>
+
+                    <!-- Antenna stem -->
+                    <line class="logo-antenna" x1="28" y1="4" x2="28" y2="12" stroke="#00f2fe" stroke-width="2" stroke-linecap="round"/>
+                    <!-- Antenna orb — glowing ball -->
+                    <circle class="logo-antenna-orb" cx="28" cy="3.5" r="2.8" fill="#00f2fe"/>
+                    <!-- Antenna orb ring -->
+                    <circle class="logo-antenna-ring" cx="28" cy="3.5" r="4.5" fill="none" stroke="#00f2fe" stroke-width="0.8" opacity="0.4"/>
+
+                    <!-- Head — chubby rounded rect with gradient fill -->
+                    <rect class="logo-head" x="6" y="12" width="44" height="32" rx="14" fill="url(#headFill)" stroke="#00f2fe" stroke-width="1.8"/>
+
+                    <!-- Rosy cheeks -->
+                    <ellipse class="logo-cheek logo-cheek--left"  cx="12" cy="32" rx="4.5" ry="3" fill="#ff6eb4" opacity="0.4"/>
+                    <ellipse class="logo-cheek logo-cheek--right" cx="44" cy="32" rx="4.5" ry="3" fill="#ff6eb4" opacity="0.4"/>
+
+                    <!-- Left eye socket -->
+                    <ellipse cx="20" cy="25" rx="6.5" ry="6.5" fill="rgba(0,242,254,0.08)" stroke="#00f2fe" stroke-width="1.4"/>
+                    <!-- Left pupil -->
+                    <circle class="logo-pupil logo-pupil--left" cx="20" cy="25" r="3.2" fill="url(#eyeGlow)"/>
+                    <!-- Left shine dots -->
+                    <circle cx="21.8" cy="23.2" r="1.1" fill="white" opacity="0.95"/>
+                    <circle cx="19"   cy="26.5" r="0.5" fill="white" opacity="0.5"/>
+
+                    <!-- Right eye socket -->
+                    <ellipse cx="36" cy="25" rx="6.5" ry="6.5" fill="rgba(0,242,254,0.08)" stroke="#00f2fe" stroke-width="1.4"/>
+                    <!-- Right pupil -->
+                    <circle class="logo-pupil logo-pupil--right" cx="36" cy="25" r="3.2" fill="url(#eyeGlow)"/>
+                    <!-- Right shine dots -->
+                    <circle cx="37.8" cy="23.2" r="1.1" fill="white" opacity="0.95"/>
+                    <circle cx="35"   cy="26.5" r="0.5" fill="white" opacity="0.5"/>
+
+                    <!-- Eyebrow left -->
+                    <path class="logo-brow logo-brow--left"  d="M14.5 18.5 Q20 16.5 25 18" stroke="#00f2fe" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+                    <!-- Eyebrow right -->
+                    <path class="logo-brow logo-brow--right" d="M31 18 Q36 16.5 41.5 18.5" stroke="#00f2fe" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+
+                    <!-- Smile -->
+                    <path class="logo-smile" d="M18 35 Q28 42 38 35" stroke="#00f2fe" stroke-width="2" stroke-linecap="round" fill="none"/>
+                    <!-- Smile fill glow -->
+                    <path class="logo-smile-fill" d="M18 35 Q28 42 38 35" stroke="rgba(0,242,254,0.2)" stroke-width="5" stroke-linecap="round" fill="none"/>
+
+                    <!-- Ear bolts -->
+                    <circle class="logo-ear logo-ear--left"  cx="6"  cy="28" r="3.5" fill="rgba(139,92,246,0.2)" stroke="#8b5cf6" stroke-width="1.4"/>
+                    <circle class="logo-ear logo-ear--right" cx="50" cy="28" r="3.5" fill="rgba(139,92,246,0.2)" stroke="#8b5cf6" stroke-width="1.4"/>
+                    <circle cx="6"  cy="28" r="1.2" fill="#8b5cf6"/>
+                    <circle cx="50" cy="28" r="1.2" fill="#8b5cf6"/>
+
+                    <!-- Neck -->
+                    <rect x="21" y="44" width="14" height="6" rx="3" fill="rgba(0,242,254,0.08)" stroke="#00f2fe" stroke-width="1.2" opacity="0.8"/>
+                    <circle cx="25" cy="47" r="1" fill="#00f2fe" opacity="0.8"/>
+                    <circle cx="28" cy="47" r="1" fill="#00f2fe" opacity="0.8"/>
+                    <circle cx="31" cy="47" r="1" fill="#00f2fe" opacity="0.8"/>
+
+                    <!-- Tiny star sparkles -->
+                    <g class="logo-sparkle logo-sparkle--1">
+                        <line x1="4"  y1="14" x2="4"  y2="18" stroke="#00f2fe" stroke-width="1" stroke-linecap="round"/>
+                        <line x1="2"  y1="16" x2="6"  y2="16" stroke="#00f2fe" stroke-width="1" stroke-linecap="round"/>
+                    </g>
+                    <g class="logo-sparkle logo-sparkle--2">
+                        <line x1="50" y1="10" x2="50" y2="14" stroke="#ff6eb4" stroke-width="1" stroke-linecap="round"/>
+                        <line x1="48" y1="12" x2="52" y2="12" stroke="#ff6eb4" stroke-width="1" stroke-linecap="round"/>
+                    </g>
+                    <g class="logo-sparkle logo-sparkle--3">
+                        <line x1="50" y1="38" x2="50" y2="42" stroke="#8b5cf6" stroke-width="1" stroke-linecap="round"/>
+                        <line x1="48" y1="40" x2="52" y2="40" stroke="#8b5cf6" stroke-width="1" stroke-linecap="round"/>
+                    </g>
+                </svg>
+
+            </a>
+                <!-- Speech bubble -->
+                <div class="robot-bubble" id="robot-bubble" aria-live="polite">
+                    <span class="robot-bubble__text" id="robot-bubble-text"></span>
+                    <span class="robot-bubble__cursor">|</span>
+                </div>
+            </div>
+            <ul class="hidden md:flex gap-10 font-medium text-sm tracking-wide text-gray-400">
+                <li><a href="#home" class="hover:text-accent-400 transition-colors">Home</a></li>
+                <li><a href="#about" class="hover:text-accent-400 transition-colors">About</a></li>
+                <li><a href="#services" class="hover:text-accent-400 transition-colors">Services</a></li>
+                <li><a href="#projects" class="hover:text-accent-400 transition-colors">Projects</a></li>
+                <li><a href="#contact" class="hover:text-accent-400 transition-colors">Contact</a></li>
+            </ul>
+            <a href="#contact" class="hire-me-btn hidden md:inline-flex">
+                <span class="hire-me-btn__dot"></span>
+                <span>Hire Me</span>
+            </a>
+        </div>
+    </nav>
+
+    <section id="home" class="min-h-screen flex items-center justify-center pt-24 px-6 relative overflow-hidden">
+        <div class="max-w-5xl mx-auto text-center z-10 gs-reveal">
+            <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-accent-400/20 bg-accent-400/5 text-accent-400 text-xs md:text-sm font-semibold mb-8 tracking-widest uppercase shadow-[0_0_20px_rgba(0,242,254,0.1)] backdrop-blur-sm">
+                <span class="w-2 h-2 rounded-full bg-accent-400 animate-pulse"></span>
+                Available for New Projects
+            </div>
+            
+            <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.15] mb-6 tracking-tight drop-shadow-2xl">
+                Engineering Scalable <br> 
+                <span class="text-gradient inline-block mt-2">Systems for the Future</span>
+            </h1>
+            
+            <p class="text-gray-400 text-lg md:text-2xl max-w-3xl mx-auto mb-12 h-8 font-light" id="typing-text"></p>
+            
+            <div class="hero-actions flex flex-col sm:flex-row gap-6 justify-center items-center">
+                <a href="resume.html" class="hero-cta-btn">
+                    <i class="fa-regular fa-file-lines hero-cta-btn__icon"></i>
+                    <span>Resume</span>
+                </a>
+                <a href="https://github.com/hassaan7714-maker" target="_blank" class="hero-cta-btn hero-cta-btn--github">
+                    <i class="fab fa-github hero-cta-btn__icon"></i>
+                    <span>GitHub Profile</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="scroll-cue absolute bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-3 opacity-60 hover:opacity-100 transition-opacity cursor-pointer" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">
+            <span class="text-xs uppercase tracking-[0.3em] font-semibold text-accent-400">Scroll</span>
+            <div class="w-[1px] h-12 bg-gradient-to-b from-accent-400 to-transparent"></div>
+        </div>
+    </section>
+
+    <div class="py-6 border-y border-white/5 bg-white/[0.01] overflow-hidden flex relative z-10 backdrop-blur-md">
+        <div class="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-dark to-transparent z-10"></div>
+        <div class="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-dark to-transparent z-10"></div>
+        
+        <div class="flex whitespace-nowrap animate-marquee gap-16 items-center text-gray-500 font-display text-xl font-bold uppercase tracking-widest opacity-80">
+            <span class="hover:text-accent-400 transition-colors"><i class="fab fa-react"></i> React.js</span> <span>•</span>
+            <span class="hover:text-blue-500 transition-colors"><i class="fab fa-python"></i> Python</span> <span>•</span>
+            <span class="hover:text-green-500 transition-colors"><i class="fab fa-node-js"></i> Node.js</span> <span>•</span>
+            <span class="hover:text-cyan-400 transition-colors">Tailwind CSS</span> <span>•</span>
+            <span class="hover:text-gray-300 transition-colors"><i class="fas fa-database"></i> SQL</span> <span>•</span>
+            <span class="hover:text-blue-600 transition-colors"><i class="fab fa-windows"></i> .NET</span> <span>•</span>
+            
+            <span class="hover:text-accent-400 transition-colors"><i class="fab fa-react"></i> React.js</span> <span>•</span>
+            <span class="hover:text-blue-500 transition-colors"><i class="fab fa-python"></i> Python</span> <span>•</span>
+            <span class="hover:text-green-500 transition-colors"><i class="fab fa-node-js"></i> Node.js</span> <span>•</span>
+            <span class="hover:text-cyan-400 transition-colors">Tailwind CSS</span> <span>•</span>
+            <span class="hover:text-gray-300 transition-colors"><i class="fas fa-database"></i> SQL</span> <span>•</span>
+            <span class="hover:text-blue-600 transition-colors"><i class="fab fa-windows"></i> .NET</span> <span>•</span>
+        </div>
+    </div>
+
+    <section id="about" class="py-32 px-6 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+                
+                <div class="lg:col-span-5 relative gs-reveal tilt-card">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-accent-400 to-accent-600 blur-3xl opacity-20 rounded-full animate-pulse-glow"></div>
+                    <div class="glass-card photo-card p-3 rounded-[2rem] relative z-10">
+                        <img src="WhatsApp Image 2025-10-19 at 20.33.51_b0bc6856.jpg" alt="Muhammad Hassaan" width="960" height="1280" loading="lazy" decoding="async" fetchpriority="low" class="rounded-[1.5rem] w-full h-[550px] object-cover filter contrast-125 grayscale hover:grayscale-0 transition-all duration-700">
+                        
+                        <!-- Experience Badge -->
+                        <div class="exp-badge-photo">
+                            <div class="exp-badge-photo__number">3+</div>
+                            <div class="exp-badge-photo__label">YRS EXP</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 gs-reveal">
+                    <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">Hello, I'm <br><span class="text-gradient">Muhammad Hassaan.</span></h2>
+
+                    <!-- Small robot about-badge -->
+                    <div class="about-badge" id="about-badge">
+                        <span class="about-badge__dot"></span>
+                        <span class="about-badge__text">CS Student · Web Developer · Open to Work</span>
+                    </div>
+                    <div class="space-y-5 mb-12">
+                        <p class="text-gray-300 text-lg leading-relaxed font-light">
+                            I'm a Computer Science student with a strong interest in web development and software design. I'm passionate about building user-friendly interfaces and scalable applications that solve real-world problems with elegant, efficient solutions.
+                        </p>
+                        <p class="text-gray-300 text-lg leading-relaxed font-light">
+                            Currently, I'm working on projects involving <span class="text-accent-400 font-medium">frontend development</span>, <span class="text-accent-500 font-medium">networking systems</span>, and <span class="text-accent-400 font-medium">database management</span>. I'm experienced in creating responsive websites and implementing dynamic functionality using <span class="text-accent-600 font-medium">JavaScript</span>, with a focus on delivering seamless user experiences and clean, maintainable code.
+                        </p>
+                        <p class="text-gray-200 text-lg leading-relaxed font-medium border-l-2 border-accent-400 pl-4">
+                            Actively learning new technologies to enhance my development skills and create impactful digital solutions that make a difference.
+                        </p>
+                    </div>
+
+                    <h3 class="font-display text-2xl font-bold mb-8 flex items-center gap-4 text-white">
+                        <span class="w-10 h-[2px] bg-accent-400"></span> Career Trajectory
+                    </h3>
+
+                        <div class="relative gs-reveal group">
+                            <span class="timeline-dot timeline-dot--mid"></span>
+                            <h4 class="text-2xl font-bold text-white mb-1 tracking-tight">Internship Trainee</h4>
+                            <p class="text-accent-500 font-medium mb-3">@ SPS, Inc. <span class="text-gray-500 text-sm ml-2 font-normal">| Oct 2025 – Jan 2026</span></p>
+                            <p class="text-gray-400 leading-relaxed font-light">Gained hands-on industry exposure in enterprise software workflows, contributing to structured team sprints, codebase maintenance, and productivity optimization — bridging the gap between academic knowledge and professional engineering practice.</p>
+                        </div>
+                        <div class="relative gs-reveal group">
+                            <span class="timeline-dot timeline-dot--mid"></span>
+                            <h4 class="text-2xl font-bold text-white mb-1 tracking-tight">Web Development Intern</h4>
+                            <p class="text-accent-500 font-medium mb-3">@ Google Coursera <span class="text-gray-500 text-sm ml-2 font-normal">| Completed 2026</span></p>
+                            <p class="text-gray-400 leading-relaxed font-light">Completed comprehensive web development professional certificate covering HTML, CSS, JavaScript, React, and responsive web design principles. Gained practical skills in building modern, accessible web applications and best practices in front-end development.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-32 px-6 relative z-10 bg-black/20 border-y border-white/5 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20 gs-reveal">
+                <span class="text-accent-400 font-semibold tracking-[0.2em] uppercase text-sm">Services</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold mt-4 tracking-tight">Professional Services I <span class="text-gradient">Offer</span></h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card p-10 rounded-3xl tilt-card gs-reveal group">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent-400/20 to-transparent flex items-center justify-center mb-8 border border-accent-400/30 group-hover:bg-accent-400 transition-colors">
+                        <i class="fas fa-code text-2xl text-accent-400 group-hover:text-dark"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 font-display tracking-tight text-white">Full Stack Development</h3>
+                    <p class="text-gray-400 leading-relaxed font-light">Designing and building complete, scalable web applications from front to back. Skilled in creating seamless integrations between intuitive frontends and powerful backend systems using modern technologies. Delivering performance, security, and real-world usability in every solution.</p>
+                </div>
+
+                <div class="glass-card p-10 rounded-3xl tilt-card gs-reveal group" style="transition-delay: 100ms;">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent-500/20 to-transparent flex items-center justify-center mb-8 border border-accent-500/30 group-hover:bg-accent-500 transition-colors">
+                        <i class="fas fa-project-diagram text-2xl text-accent-500 group-hover:text-dark"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 font-display tracking-tight text-white">Software Design & Architecture</h3>
+                    <p class="text-gray-400 leading-relaxed font-light">Crafting strong foundations for software systems. Focused on designing Scalable, Maintainable & Secure Architectures. Ensuring systems are robust, portable, provide Interoperability and future-ready with proper SDD Documentation for easy Maintainability.</p>
+                </div>
+
+                <div class="glass-card p-10 rounded-3xl tilt-card gs-reveal group" style="transition-delay: 200ms;">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent-600/20 to-transparent flex items-center justify-center mb-8 border border-accent-600/30 group-hover:bg-accent-600 transition-colors">
+                        <i class="fas fa-mobile-alt text-2xl text-accent-600 group-hover:text-dark"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 font-display tracking-tight text-white">UI/UX & Design</h3>
+                    <p class="text-gray-400 leading-relaxed font-light">Translating raw ideas into beautiful, intuitive experiences. Focusing on seamless user journeys, elegant wireframing, and modern aesthetics.</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
+                <div class="glass-card p-10 rounded-3xl tilt-card gs-reveal group">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent-400/20 to-transparent flex items-center justify-center mb-8 border border-accent-400/30 group-hover:bg-accent-400 transition-colors">
+                        <i class="fas fa-database text-2xl text-accent-400 group-hover:text-dark"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 font-display tracking-tight text-white">Database Management</h3>
+                    <p class="text-gray-400 leading-relaxed font-light">Expert in designing and managing databases using SQL, Microsoft SQL Server, and MongoDB. Building efficient data architectures, optimizing queries, and ensuring data integrity for scalable applications.</p>
+                </div>
+                <div class="glass-card p-10 rounded-3xl tilt-card gs-reveal group" style="transition-delay: 100ms;">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent-500/20 to-transparent flex items-center justify-center mb-8 border border-accent-500/30 group-hover:bg-accent-500 transition-colors">
+                        <i class="fas fa-database text-2xl text-accent-500 group-hover:text-dark"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 font-display tracking-tight text-white">Data Engineering</h3>
+                    <p class="text-gray-400 leading-relaxed font-light">Designing data pipelines, ETL systems, and analytics-ready architectures so business data is clean, accessible, and actionable.</p>
+                </div>
+                <div class="glass-card p-10 rounded-3xl tilt-card gs-reveal group" style="transition-delay: 200ms;">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent-600/20 to-transparent flex items-center justify-center mb-8 border border-accent-600/30 group-hover:bg-accent-600 transition-colors">
+                        <i class="fas fa-network-wired text-2xl text-accent-600 group-hover:text-dark"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 font-display tracking-tight text-white">Network Engineering</h3>
+                    <p class="text-gray-400 leading-relaxed font-light">Building and managing reliable network infrastructures. Knowledge of network configuration, security, and optimization to ensure smooth and secure communication between systems. Supporting high availability and efficient data flow.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects-section py-32 px-6 relative z-10">
+        <div class="max-w-7xl mx-auto relative">
+            <div class="projects-header gs-reveal">
+                <div class="projects-copy">
+                    <span class="projects-kicker">GitHub Projects</span>
+                    <h2 class="projects-heading">
+                        <span class="ph-word ph-word--1">Projects</span>
+                        <span class="ph-word ph-word--2">From</span>
+                        <span class="ph-word ph-word--3">My</span>
+                        <br>
+                        <span class="ph-word ph-word--4 ph-glitch" data-text="GitHub">GitHub</span>
+                    </h2>
+                    <p class="projects-lede">A curated look at the repositories where I turn ideas into useful interfaces, backend systems, and clean software experiments.</p>
+                </div>
+
+                <aside class="projects-source glass-card" aria-label="GitHub project source" role="link" tabindex="0" onclick="window.open('https://github.com/hassaan7714-maker','_blank')" onkeydown="if(event.key==='Enter')window.open('https://github.com/hassaan7714-maker','_blank')" style="cursor:pointer;">
+                    <div class="projects-source__header">
+                        <div>
+                            <span class="projects-source__status">Source Profile</span>
+                            <a href="https://github.com/hassaan7714-maker" target="_blank" rel="noopener noreferrer" class="projects-source__user">
+                                hassaan7714
+                            </a>
+                        </div>
+                        <div class="projects-source__icon-wrap">
+                            <i class="fab fa-github"></i>
+                        </div>
+                    </div>
+                    <div class="projects-metrics">
+                        <div>
+                            <strong id="repo-count">--</strong>
+                            <span>Repos Shown</span>
+                        </div>
+                        <div>
+                            <strong id="repo-language-count">--</strong>
+                            <span>Languages</span>
+                        </div>
+                        <div>
+                            <strong id="repo-updated">--</strong>
+                            <span>Latest Update</span>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <div class="projects-grid" id="github-repos" aria-live="polite">
+                <div class="project-card project-card--loading glass-card" aria-hidden="true"></div>
+                <div class="project-card project-card--loading glass-card" aria-hidden="true"></div>
+                <div class="project-card project-card--loading glass-card" aria-hidden="true"></div>
+            </div>
+
+            <div class="projects-cta">
+                <a href="https://github.com/hassaan7714-maker?tab=repositories" target="_blank" rel="noopener noreferrer" class="projects-cta__button">
+                    <i class="fab fa-github"></i>
+                    <span class="projects-cta__label">
+                        <span class="projects-cta__label-main">Further Projects on GitHub</span>
+                        <span class="projects-cta__label-alt">View All Repositories →</span>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-32 px-6 relative z-10">
+        <div class="max-w-7xl mx-auto relative">
+            <!-- Background blobs -->
+            <div class="absolute top-0 right-0 w-96 h-96 bg-accent-600 rounded-full blur-[120px] opacity-15 pointer-events-none"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-accent-400 rounded-full blur-[120px] opacity-15 pointer-events-none"></div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-stretch relative z-10">
+                <!-- Left Column: Heading + Contact Info -->
+                <div class="gs-reveal flex flex-col contact-left">
+                    <h2 class="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight leading-[1.1]">
+                        GET IN <span class="text-gradient">TOUCH</span>
+                    </h2>
+                    <p class="text-gray-400 text-lg mb-10 font-light leading-relaxed">
+                        Have a project, opportunity, or just want to talk shop?<br>
+                        Send a message and I'll reply within 24–48 hours.
+                    </p>
+
+                    <div class="space-y-5">
+                        <!-- Email -->
+                        <div class="flex items-center gap-4 group">
+                            <div class="w-11 h-11 rounded-xl bg-accent-400/10 border border-accent-400/20 flex items-center justify-center flex-shrink-0 group-hover:bg-accent-400/20 transition-colors">
+                                <i class="fas fa-envelope text-accent-400"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-0.5">Email</p>
+                                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=hassaan7714@gmail.com" target="_blank" rel="noopener noreferrer" class="text-white font-medium hover:text-accent-400 transition-colors text-sm">
+                                    hassaan7714@gmail.com
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="flex items-center gap-4 group">
+                            <div class="w-11 h-11 rounded-xl bg-accent-500/10 border border-accent-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-accent-500/20 transition-colors">
+                                <i class="fas fa-phone text-accent-500"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-0.5">Phone</p>
+                                <a href="tel:+923071597714" class="text-white font-medium hover:text-accent-500 transition-colors text-sm">
+                                    +92-307-1597714
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Location -->
+                        <div class="flex items-center gap-4 group">
+                            <div class="w-11 h-11 rounded-xl bg-accent-600/10 border border-accent-600/20 flex items-center justify-center flex-shrink-0 group-hover:bg-accent-600/20 transition-colors">
+                                <i class="fas fa-map-marker-alt text-accent-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-0.5">Location</p>
+                                <p class="text-white font-medium text-sm">Multan, Punjab, Pakistan • Remote</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="mt-8 pt-6 border-t border-white/10">
+                        <p class="text-xs text-gray-500 uppercase tracking-wider font-semibold mb-3">Connect</p>
+                        <div class="flex gap-3">
+                            <a href="https://www.linkedin.com/in/muhammad-hassaan-345231357/" target="_blank" class="w-10 h-10 rounded-lg border border-white/10 flex items-center justify-center text-gray-400 hover:bg-[#0a66c2] hover:text-white hover:border-transparent transition-all hover:-translate-y-1 bg-dark/50 backdrop-blur-sm">
+                                <i class="fab fa-linkedin-in text-sm"></i>
+                            </a>
+                            <a href="https://github.com/hassaan7714-maker" target="_blank" class="w-10 h-10 rounded-lg border border-white/10 flex items-center justify-center text-gray-400 hover:bg-white hover:text-dark hover:border-transparent transition-all hover:-translate-y-1 bg-dark/50 backdrop-blur-sm">
+                                <i class="fab fa-github text-sm"></i>
+                            </a>
+                            <a href="https://www.instagram.com/hassaan.khalid.580?igsh=MTJzeW1pNjB1c3JseQ==" target="_blank" class="w-10 h-10 rounded-lg border border-white/10 flex items-center justify-center text-gray-400 hover:bg-gradient-to-tr hover:from-[#f09433] hover:via-[#dc2743] hover:to-[#bc1888] hover:text-white hover:border-transparent transition-all hover:-translate-y-1 bg-dark/50 backdrop-blur-sm">
+                                <i class="fab fa-instagram text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Availability card — fills remaining height -->
+                    <div class="mt-auto pt-8">
+                        <div class="avail-card rounded-2xl border border-accent-400/20 bg-accent-400/5 p-6 relative overflow-hidden">
+                            <!-- Scan sweep -->
+                            <div class="avail-card__scan"></div>
+                            <!-- Corner glow -->
+                            <div class="absolute inset-0 bg-gradient-to-br from-accent-400/10 to-transparent pointer-events-none"></div>
+                            <div class="relative z-10 flex items-start gap-4">
+                                <!-- Dot with ping ripple -->
+                                <div class="relative flex-shrink-0 mt-1">
+                                    <span class="absolute inline-flex w-3 h-3 rounded-full bg-accent-400 opacity-60 animate-ping"></span>
+                                    <span class="relative inline-flex w-3 h-3 rounded-full bg-accent-400 shadow-[0_0_10px_#00f2fe]"></span>
+                                </div>
+                                <div>
+                                    <p class="text-white font-bold font-display text-lg mb-1">Available for Work</p>
+                                    <p class="text-gray-400 text-sm font-light leading-relaxed">
+                                        Currently open to freelance projects, full-time roles, and exciting collaborations. Let's build something great together.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Contact Form -->
+                <div class="glass-card p-8 md:p-10 rounded-3xl gs-reveal contact-right">
+                    <form id="contact-form" class="space-y-6" onsubmit="handleContactSubmit(event)">
+                        <!-- Name -->
+                        <div class="group">
+                            <label class="block text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wider">Name</label>
+                            <input 
+                                id="cf-name"
+                                type="text" 
+                                class="w-full bg-dark/50 backdrop-blur-md border border-white/10 rounded-xl px-5 py-4 focus:outline-none focus:border-accent-400 text-white transition-all placeholder-gray-600" 
+                                placeholder="Your name" 
+                                required
+                            >
+                        </div>
+
+                        <!-- Email -->
+                        <div class="group">
+                            <label class="block text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wider">Email</label>
+                            <input 
+                                id="cf-email"
+                                type="email" 
+                                class="w-full bg-dark/50 backdrop-blur-md border border-white/10 rounded-xl px-5 py-4 focus:outline-none focus:border-accent-400 text-white transition-all placeholder-gray-600" 
+                                placeholder="your@email.com" 
+                                required
+                            >
+                        </div>
+
+                        <!-- Subject -->
+                        <div class="group">
+                            <label class="block text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wider">Subject</label>
+                            <input 
+                                id="cf-subject"
+                                type="text" 
+                                class="w-full bg-dark/50 backdrop-blur-md border border-white/10 rounded-xl px-5 py-4 focus:outline-none focus:border-accent-400 text-white transition-all placeholder-gray-600" 
+                                placeholder="Project inquiry, collaboration..." 
+                                required
+                            >
+                        </div>
+
+                        <!-- Message -->
+                        <div class="group">
+                            <label class="block text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wider">Message</label>
+                            <textarea 
+                                id="cf-message"
+                                rows="4" 
+                                class="w-full bg-dark/50 backdrop-blur-md border border-white/10 rounded-xl px-5 py-4 focus:outline-none focus:border-accent-400 text-white transition-all resize-none placeholder-gray-600" 
+                                placeholder="Tell me about your project..." 
+                                required
+                            ></textarea>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button 
+                            type="submit" 
+                            class="w-full bg-gradient-to-r from-accent-400 to-accent-600 text-white font-bold text-base py-4 rounded-xl hover:from-accent-500 hover:to-accent-700 transition-all duration-300 shadow-lg shadow-accent-400/20 hover:shadow-accent-400/40 transform hover:-translate-y-1 flex items-center justify-center gap-2"
+                        >
+                            <span>Send Message</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="portfolio-footer" class="portfolio-footer relative z-10">
+        <div class="portfolio-footer__inner">
+            <div class="portfolio-footer__content">
+                <span class="portfolio-footer__eyebrow">
+                    <span class="footer-eyebrow__line footer-eyebrow__line--left"></span>
+                    Keep Exploring
+                    <span class="footer-eyebrow__line footer-eyebrow__line--right"></span>
+                </span>
+                <h2 class="portfolio-footer__title">
+                    <span class="footer-word footer-word--1">Thanks</span>
+                    <span class="footer-word footer-word--2"> For </span>
+                    <span class="footer-word footer-word--3 text-gradient">Visiting</span>
+                </h2>
+                <p class="portfolio-footer__copy">Built with focus,
+                    <span class="footer-mug">
+                        <i class="fas fa-mug-hot mx-1" aria-hidden="true"></i>
+                        <span class="footer-steam" aria-hidden="true">
+                            <span class="footer-steam__wisp footer-steam__wisp--1"></span>
+                            <span class="footer-steam__wisp footer-steam__wisp--2"></span>
+                            <span class="footer-steam__wisp footer-steam__wisp--3"></span>
+                        </span>
+                    </span>
+                    , and clean code.
+                </p>
+            </div>
+
+            <div class="portfolio-footer__actions" aria-label="Portfolio quick links">
+                <a href="#home" class="portfolio-footer__link"><i class="fas fa-house"></i><span>Home</span></a>
+                <a href="#about" class="portfolio-footer__link"><i class="fas fa-user"></i><span>About</span></a>
+                <a href="#projects" class="portfolio-footer__link"><i class="fas fa-layer-group"></i><span>Projects</span></a>
+                <a href="https://github.com/hassaan7714-maker" target="_blank" class="portfolio-footer__link"><i class="fab fa-github"></i><span>GitHub</span></a>
+                <a href="https://www.linkedin.com/in/muhammad-hassaan-345231357/" target="_blank" class="portfolio-footer__link"><i class="fab fa-linkedin-in"></i><span>LinkedIn</span></a>
+            </div>
+
+            <div class="portfolio-footer__bottom">
+                <p>Portfolio by <span>Muhammad Hassaan</span></p>
+                <p>&copy; 2026 All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Roaming Robot -->
+    <div id="roaming-robot" aria-hidden="true">
+        <div id="roaming-robot-bubble"></div>
+        <svg width="64" height="64" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <radialGradient id="rEyeGlow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+                    <stop offset="100%" stop-color="#00f2fe" stop-opacity="1"/>
+                </radialGradient>
+                <radialGradient id="rHeadFill" cx="50%" cy="40%" r="60%">
+                    <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.12"/>
+                    <stop offset="100%" stop-color="#0a0c12" stop-opacity="0.05"/>
+                </radialGradient>
+            </defs>
+            <line x1="28" y1="4" x2="28" y2="12" stroke="#00f2fe" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="28" cy="3.5" r="2.8" fill="#00f2fe" class="r-antenna-orb"/>
+            <circle cx="28" cy="3.5" r="4.5" fill="none" stroke="#00f2fe" stroke-width="0.8" opacity="0.4" class="r-antenna-ring"/>
+            <rect x="6" y="12" width="44" height="32" rx="14" fill="url(#rHeadFill)" stroke="#00f2fe" stroke-width="1.8" class="r-head"/>
+            <ellipse cx="12" cy="32" rx="4.5" ry="3" fill="#ff6eb4" opacity="0.4"/>
+            <ellipse cx="44" cy="32" rx="4.5" ry="3" fill="#ff6eb4" opacity="0.4"/>
+            <ellipse cx="20" cy="25" rx="6.5" ry="6.5" fill="rgba(0,242,254,0.08)" stroke="#00f2fe" stroke-width="1.4"/>
+            <circle cx="20" cy="25" r="3.2" fill="url(#rEyeGlow)" class="r-pupil-l"/>
+            <circle cx="21.8" cy="23.2" r="1.1" fill="white" opacity="0.95"/>
+            <ellipse cx="36" cy="25" rx="6.5" ry="6.5" fill="rgba(0,242,254,0.08)" stroke="#00f2fe" stroke-width="1.4"/>
+            <circle cx="36" cy="25" r="3.2" fill="url(#rEyeGlow)" class="r-pupil-r"/>
+            <circle cx="37.8" cy="23.2" r="1.1" fill="white" opacity="0.95"/>
+            <path d="M14.5 18.5 Q20 16.5 25 18" stroke="#00f2fe" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+            <path d="M31 18 Q36 16.5 41.5 18.5" stroke="#00f2fe" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+            <path d="M18 35 Q28 42 38 35" stroke="#00f2fe" stroke-width="2" stroke-linecap="round" fill="none" class="r-smile"/>
+            <path d="M18 35 Q28 42 38 35" stroke="rgba(0,242,254,0.2)" stroke-width="5" stroke-linecap="round" fill="none"/>
+            <circle cx="6"  cy="28" r="3.5" fill="rgba(139,92,246,0.2)" stroke="#8b5cf6" stroke-width="1.4"/>
+            <circle cx="50" cy="28" r="3.5" fill="rgba(139,92,246,0.2)" stroke="#8b5cf6" stroke-width="1.4"/>
+            <circle cx="6"  cy="28" r="1.2" fill="#8b5cf6"/>
+            <circle cx="50" cy="28" r="1.2" fill="#8b5cf6"/>
+            <rect x="21" y="44" width="14" height="6" rx="3" fill="rgba(0,242,254,0.08)" stroke="#00f2fe" stroke-width="1.2" opacity="0.8"/>
+            <circle cx="25" cy="47" r="1" fill="#00f2fe" opacity="0.8"/>
+            <circle cx="28" cy="47" r="1" fill="#00f2fe" opacity="0.8"/>
+            <circle cx="31" cy="47" r="1" fill="#00f2fe" opacity="0.8"/>
+        </svg>
+    </div>
+    <button id="catch-robot-btn" aria-label="Send robot back to navbar">
+        <span class="btn-ring"></span>
+        <span class="btn-ring-2"></span>
+        <span class="btn-scan"></span>
+        <span class="btn-icon">🤖</span>
+        <span>Catch Robot</span>
+    </button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Hassaan - Web Developer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            line-height: 1.5;
+            color: #1a1a1a;
+            padding: 15px 0;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px 35px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border-radius: 0;
+            display: flex;
+            gap: 25px;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            flex: 0 0 220px;
+            padding-right: 20px;
+            border-right: 2px solid #e5e7eb;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        /* HEADER */
+        .header {
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #000;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            letter-spacing: -0.5px;
+            color: #000;
+            line-height: 1.1;
+        }
+
+        .header-title {
+            font-size: 11px;
+            color: #666;
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+
+        .contact-line {
+            font-size: 9.5px;
+            color: #1a1a1a;
+            line-height: 1.6;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 0;
+        }
+
+        .contact-item {
+            display: inline;
+            color: #1a1a1a;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .contact-item:hover {
+            color: #0077b5;
+        }
+
+        .contact-separator {
+            margin: 0 3px;
+        }
+
+        /* SIDEBAR SECTIONS */
+        .sidebar-section {
+            margin-bottom: 14px;
+        }
+
+        .sidebar-title {
+            font-size: 10.5px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 6px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #0077b5;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-item {
+            font-size: 9.5px;
+            color: #1a1a1a;
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+
+        .sidebar-item strong {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .sidebar-item em {
+            display: block;
+            font-style: italic;
+            color: #666;
+            font-size: 9px;
+            margin-bottom: 3px;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background: #f0f4f8;
+            padding: 2px 6px;
+            border-radius: 2px;
+            margin: 2px 3px 2px 0;
+            font-size: 9px;
+            border: 0.5px solid #d1d5db;
+        }
+
+        /* MAIN CONTENT SECTIONS */
+        .section {
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 8px;
+            padding-bottom: 4px;
+            border-bottom: 2px solid #0077b5;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* EXPERIENCE & PROJECTS */
+        .exp-item {
+            margin-bottom: 8px;
+            padding-bottom: 6px;
+            border-bottom: 0.5px solid #e5e7eb;
+        }
+
+        .exp-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 2px;
+            gap: 8px;
+        }
+
+        .exp-title-line {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .exp-title-line strong {
+            font-size: 10px;
+            font-weight: 700;
+            color: #000;
+        }
+
+        .exp-location {
+            font-size: 9px;
+            color: #666;
+            text-align: right;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .exp-subtitle {
+            font-size: 9.5px;
+            font-style: italic;
+            color: #1a1a1a;
+            margin-bottom: 2px;
+        }
+
+        .exp-item ul {
+            margin-left: 14px;
+            margin-top: 3px;
+        }
+
+        .exp-item li {
+            font-size: 9px;
+            line-height: 1.35;
+            color: #1a1a1a;
+            margin-bottom: 2px;
+        }
+
+        .project-title {
+            font-size: 10px;
+            font-weight: 700;
+            color: #000;
+        }
+
+        /* ABOUT ME TEXT */
+        .summary-text {
+            font-size: 9.5px;
+            line-height: 1.4;
+            color: #1a1a1a;
+            text-align: justify;
+        }
+
+        /* PRINT BUTTON */
+        .print-button {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: #000;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+            font-family: inherit;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: background 0.2s;
+        }
+
+        .print-button:hover {
+            background: #333;
+        }
+
+        /* MOBILE RESPONSIVE */
+        @media screen and (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                gap: 15px;
+                padding: 20px 25px;
+            }
+
+            .sidebar {
+                flex: 1 1 auto;
+                padding-right: 0;
+                border-right: none;
+                border-bottom: 2px solid #e5e7eb;
+                padding-bottom: 15px;
+            }
+
+            .sidebar-section {
+                display: inline-block;
+                margin-right: 20px;
+                margin-bottom: 0;
+            }
+        }
+
+        /* PRINT STYLES */
+        @media print {
+            @page {
+                size: A4;
+                margin: 10mm;
+            }
+
+            body {
+                background: white !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                padding: 0;
+            }
+
+            .container {
+                width: 850px !important;
+                max-width: none !important;
+                padding: 30px 35px !important;
+                margin: 0 auto !important;
+                box-shadow: none !important;
+                border: none !important;
+                gap: 25px !important;
+                display: flex !important;
+                flex-direction: row !important;
+            }
+
+            .sidebar {
+                flex: 0 0 220px !important;
+                padding-right: 20px !important;
+                border-right: 2px solid #e5e7eb !important;
+            }
+
+            .main-content {
+                flex: 1 !important;
+            }
+
+            .print-button {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="print-button" onclick="window.print()">🖨️ Print</button>
+
+    <div class="container">
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <!-- CONTACT -->
+            <div class="sidebar-section">
+                <div class="sidebar-title">Contact</div>
+                <div class="sidebar-item">
+                    <strong>Email:</strong>
+                    <a class="contact-item" href="mailto:hassaan7714@gmail.com">hassaan7714@gmail.com</a>
+                </div>
+                <div class="sidebar-item">
+                    <strong>Phone:</strong>
+                    <a class="contact-item" href="tel:+923071597714">+92 307 159 7714</a>
+                </div>
+                <div class="sidebar-item">
+                    <strong>Location:</strong>
+                    <span>Multan, Punjab, Pakistan</span>
+                </div>
+                <div class="sidebar-item">
+                    <strong>LinkedIn:</strong>
+                    <a class="contact-item" href="https://www.linkedin.com/in/muhammad-hassaan-345231357/" target="_blank">muhammad-hassaan-345231357</a>
+                </div>
+                <div class="sidebar-item">
+                    <strong>GitHub:</strong>
+                    <a class="contact-item" href="https://github.com/hassaan7714-maker" target="_blank">hassaan7714-maker</a>
+                </div>
+            </div>
+
+            <!-- TECHNICAL SKILLS -->
+            <div class="sidebar-section">
+                <div class="sidebar-title">Skills</div>
+                <div class="sidebar-item">
+                    <span class="skill-tag">HTML</span>
+                    <span class="skill-tag">CSS</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">C++</span>
+                    <span class="skill-tag">C#</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">.NET</span>
+                    <span class="skill-tag">Git</span>
+                    <span class="skill-tag">SQL</span>
+                </div>
+            </div>
+
+            <!-- LANGUAGES -->
+            <div class="sidebar-section">
+                <div class="sidebar-title">Languages</div>
+                <div class="sidebar-item">
+                    English, Urdu
+                </div>
+            </div>
+
+            <!-- HOBBIES -->
+            <div class="sidebar-section">
+                <div class="sidebar-title">Hobbies</div>
+                <div class="sidebar-item">
+                    Photography & Travelling, Problem Solving
+                </div>
+            </div>
+
+            <!-- EDUCATION -->
+            <div class="sidebar-section">
+                <div class="sidebar-title">Education</div>
+                <div class="sidebar-item">
+                    <strong>BS Computer Science</strong>
+                    <em>Air University, Multan</em>
+                    CGPA: 3.67/4.0<br>2024 &ndash; 2028
+                </div>
+                <div class="sidebar-item">
+                    <strong>Intermediate (ICS)</strong>
+                    <em>Punjab College, Multan</em>
+                    Grade: 83%<br>2022 &ndash; 2024
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <!-- HEADER -->
+            <div class="header">
+                <h1>Muhammad Hassaan</h1>
+                <div class="header-title">Web Developer | Full Stack Developer</div>
+                <div class="contact-line">
+                    <span class="contact-item">📍 Multan, Pakistan</span>
+                    <span class="contact-separator">&bull;</span>
+                    <a class="contact-item" href="mailto:hassaan7714@gmail.com">hassaan7714@gmail.com</a>
+                </div>
+            </div>
+
+            <!-- ABOUT ME -->
+            <div class="section">
+                <h2 class="section-title">About Me</h2>
+                <p class="summary-text">Motivated CS student passionate about building user-friendly interfaces and scalable applications. Experienced in responsive websites and dynamic JavaScript functionality. Proven problem-solving abilities with strong teamwork skills.</p>
+            </div>
+
+            <!-- EXPERIENCE -->
+            <div class="section">
+                <h2 class="section-title">Experience</h2>
+
+                <div class="exp-item">
+                    <div class="exp-header">
+                        <div class="exp-title-line">
+                            <strong>SPSS Technologies</strong>
+                        </div>
+                        <div class="exp-location">Multan, Pakistan</div>
+                    </div>
+                    <div class="exp-subtitle">Web Development Intern &ndash; 2025</div>
+                    <ul>
+                        <li>Contributed to web development projects with clean, maintainable code</li>
+                        <li>Worked with databases and backend logic for real-world applications</li>
+                        <li>Strengthened understanding of software development practices</li>
+                    </ul>
+                </div>
+
+                <div class="exp-item">
+                    <div class="exp-header">
+                        <div class="exp-title-line">
+                            <strong>Atch Technologies</strong>
+                        </div>
+                        <div class="exp-location">Multan, Pakistan</div>
+                    </div>
+                    <div class="exp-subtitle">Web Development Intern &ndash; 2025</div>
+                    <ul>
+                        <li>Developed responsive web applications using modern technologies</li>
+                        <li>Gained hands-on experience in frontend and backend integration</li>
+                        <li>Collaborated with team members to improve UI and functionality</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- PROJECTS -->
+            <div class="section">
+                <h2 class="section-title">Projects</h2>
+
+                <div class="exp-item">
+                    <strong class="project-title">Cashup</strong>
+                    <ul style="margin-top: 2px;">
+                        <li>Financial management platform built with .NET Framework for tracking expenses and budgeting</li>
+                        <li>Real-time analytics with secure data handling and responsive UI</li>
+                    </ul>
+                </div>
+
+                <div class="exp-item">
+                    <strong class="project-title">Flood Detection System</strong>
+                    <ul style="margin-top: 2px;">
+                        <li>Real-time monitoring and flood risk detection for community awareness</li>
+                        <li>Data processing and alerting mechanisms for emergency preparedness</li>
+                    </ul>
+                </div>
+
+                <div class="exp-item">
+                    <strong class="project-title">Advanced Networking System</strong>
+                    <ul style="margin-top: 2px;">
+                        <li>Built in C++ using OOP to control networking devices and camera systems</li>
+                        <li>Robust error handling and communication protocols implementation</li>
+                    </ul>
+                </div>
+
+                <div class="exp-item">
+                    <strong class="project-title">Luxury Estate Rental Web App</strong>
+                    <ul style="margin-top: 2px;">
+                        <li>Full-stack web application with modern UI/UX design and responsive interface</li>
+                        <li>Contemporary web development technologies and best practices</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
